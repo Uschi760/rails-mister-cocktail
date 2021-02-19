@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# rubocop:enable
 class CocktailsController < ApplicationController
   before_action :set_cocktail, only: [:show, :edit, :update, :destroy]
 end
@@ -8,4 +11,4 @@ def index
 end
 
 # GET /cocktails/1
-  def show; end
+def show; end

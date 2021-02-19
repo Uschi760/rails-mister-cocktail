@@ -29,7 +29,7 @@ def update
     redirect_to cocktail_path(@cocktail)
   else
     render 'edit'
-  end
+end
 
 def destroy
   @cocktail.destroy

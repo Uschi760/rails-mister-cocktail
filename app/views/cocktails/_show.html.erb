@@ -1,1 +1,45 @@
-_show.html.erb
+<div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('<%= @cocktail.banner_url %>')">
+  <h1><%= @cocktail.name %></h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <% @cocktail.ingredients.each do |ingredient| %>
+      <div class="col-sm-4">
+        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= ingredient.image_url %>');">
+          <div class="card-tags">
+            <% ingredient.ingredient_tags.each do |ingredient_tag| %>
+              <span>
+                <%= ingredient_tag.tag.name %>
+                <%= link_to ingredient_path(ingredient_tag), method: :delete, data: { confirm: "Are you sure?" } do %>
+                  <i class="fas fa-times"></i>
+                <% end %>
+              </span>
+            <% end %>
+            <%= link_to new_ingredient_ingredient_path(ingredient) do %>
+              <i class="fas fa-plus"></i>
+            <% end %>
+          </div>
+          <div class="card-description">
+            <h2><%= ingredient.name %></h2>
+          </div>
+          <%= link_to "+", ingredient_path(ingredient), method: :delete, data: { confirm: "Are you sure?" }, class: "card-remove-link" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-4">
+      <h4>Add a ingredient:</h4>
+      <%= simple_form_for [ @cocktail, @ingredient ] do |f| %>
+        <%= f.input :name, placeholder: "Mojito" %>
+        <%= f.input :image_url, placeholder: ".jpg" %>
+        <%= f.submit "Add", class: "btn btn-primary" %>
+      <% end %>
+      <button class="btn btn-secondary toggle-form">Toggle form</button>
+    </div>
+  </div>
+</div>

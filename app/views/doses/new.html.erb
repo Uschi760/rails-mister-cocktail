@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+      <h1>Add new amount for <%= @dose.name %></h1>
+
+      <%= simple_form_for [@ingredient, @dose] do |f| %>
+        <%= f.input :tag, collection: Tag.all, input_html: { multiple: true, class: 'multiple-select' }, include_hidden: false %>
+        <%= f.submit "Add amount", class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+</div>

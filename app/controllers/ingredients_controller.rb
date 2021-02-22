@@ -7,11 +7,9 @@ def create
 def new
   @dose = Dose.find(params[:dose_id])
   @ingredient = Ingredient.new(dose_params)
-  @ingredient.dose = @dose
-  if condition
-
-  end
+  @ingredient.dose =
 end
 
 end
 
+end

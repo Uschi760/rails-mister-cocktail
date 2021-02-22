@@ -3,30 +3,31 @@
 # rubocop:enable
 class DosesController < ApplicationController
   def new
-    @ingredient = Ingredient.find(params[:ingredient_id])
+    @cocktail = Cocktail.find(params[:cocktail_id])
     @dose = Dose.new
   end
 
   def create
-    @ingredient = Ingredient.find(params[:ingredient_id])
-    @dose = Dose.new(ingredients_params)
-    @dose.ingredient = @ingredient
+    @cocktail = Cocktail.find(params[cocktail_id])
+    @dose = Dose.new(dose_params)
+    @dose.cocktail = cocktail
     if @dose.save
-      redirect_to ingredient_path(@ingredient)
+      redirect_to cocktail_path(@cocktail)
     else
-      render :new
+      @review = Review.new
+      render 'cocktails/show'
     end
   end
 
   def destroy
     @dose = Dose.find(params[:id])
     @dose.destroy
-    redirect_to ingredient_path(@dose.ingredient)
+    redirect_to cocktail_path(@dose.coktail)
   end
 
   private
 
-  def review_params
-    params.require(:dose).permit(:content)
+  def dose_params
+    params.require(:dose).permit(:decription, :ingredient_id)
   end
 end
